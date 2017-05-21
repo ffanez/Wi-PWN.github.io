@@ -4,7 +4,6 @@ html, body {
   background: #F1F1F1
 }
 nav.disabled a {
-  pointer-events: none;
   color: rgba(255, 255, 255, 0.2) !important
 }
 nav {
@@ -12,11 +11,10 @@ nav {
   position: fixed;
   width: 100%;
   z-index: 100;
-  top: 0;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.20)
 }
 nav a {
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
 }
 nav .main-header {
   background: #2196F3;
@@ -25,11 +23,25 @@ nav .main-header {
   font-size: 20px;
   height: 30px
 }
-nav .main-header img {
-  height: 45px;
+#logo-img, #logo-img2 {
+  background: #359DF2;
+  border-radius: 999px
+}
+#logo-img {
+  height: 31px;
+  width: 31px;
+  padding: 7px;
   left: 25px;
   position: fixed;
-  top: 13px
+  top: 13px;
+  background: #42A5F5
+}
+#logo-img2 {
+  float: left;
+  margin-right: 20px;
+  padding: 40px;
+  height: 100px;
+  width: 100px
 }
 nav #links {
   height: 64px;
@@ -62,7 +74,7 @@ nav #links a:hover {
 }
 h1 {
   color: rgba(0, 0, 0, .66);
-  font: 400 24px "Roboto", "Helvetica", "Arial", sans-serif
+  font-size: 24px
 }
 .main-wrap {
   position: absolute;
@@ -70,25 +82,23 @@ h1 {
   left: 0;
   right: 0;
   bottom: 0;
-  overflow-y: scroll;
+  overflow-y: scroll
 }
 #selectedClients li, #selectedAPs li {
   list-style: none;
   font-family: Consolas, Courier New, monospace, sans-serif;
-  padding: 3px;
+  padding: 3px
 }
 #selectedAPs, #selectedClients {
   background-color: #eff0f1;
-  -webkit-padding-start: 5px;
+  -webkit-padding-start: 5px
 }
 #networksFound, #apMAC {
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
   padding: 6px;
   margin-top: 8px;
   font-family: Consolas, Courier New, monospace, sans-serif;
-  display: inline-block;
-}
-.network-info {
+  display: inline-block
 }
 .card, .card-basic {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
@@ -105,7 +115,7 @@ h1 {
 }
 .avatar-header {
   display: inline;
-  font: 500 20px "Roboto", "Helvetica", "Arial", sans-serif
+  font-size: 20px
 }
 .profile {
   height: 60px;
@@ -118,17 +128,24 @@ table {
   width: 100%;
   text-align: center;
   border: none;
-  border-collapse: collapse
+  border-collapse: collapse;
+  margin-bottom: 20px
 }
 td {
   font-weight: 400;
-  font-size: .85em
+  font-size: .85em;
+  line-height: 35px
 }
 .bottom-border {
   border-bottom: 1px solid #c3c3c3
 }
+.selected td, .selected:hover td {
+  color: #fff;
+  background: none
+}
 .selected {
-  background: rgba(0,0,0,0.07)
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  background: rgba(33, 150, 243, 1) !important
 }
 .left {
   float: left;
@@ -175,15 +192,14 @@ hr {
   word-wrap: break-word;
   text-align: center;
   font-size: 11px;
-  margin-bottom: 30px;
+  margin-bottom: 30px
 }
 #error:empty {
-  opacity: 0;
+  opacity: 0
 }
 #networksFound:empty, #apMAC:empty {
-  display: none;
+  display: none
 }
-
 a {
   color: #2196F3;
   cursor: pointer
@@ -293,8 +309,7 @@ footer a {
   font-size: 1rem;
   cursor: text;
   transition: .2s ease-in-out;
-  box-sizing: border-box;
-  pointer-events: none
+  box-sizing: border-box
 }
 .input-container input, .input-container label {
   width: 100%;
@@ -396,18 +411,6 @@ label.checkbox:active:before {
   width: 96%;
   display: inline-block
 }
-.col-1-sm {
-  width: 4.33%
-}
-.col-4-sm {
-  width: 29.33%
-}
-.col-11-sm {
-  width: 87.66%
-}
-.col-12-sm {
-  width: 96%
-}
 .row::after {
   content: "";
   display: table;
@@ -419,6 +422,9 @@ label.checkbox:active:before {
   }
 }
 @media (max-width:520px) {
+  .background {
+    display: none;
+  }
   nav a {
     padding: 0 12px !important;
     font-size: 13px !important
@@ -448,7 +454,10 @@ label.checkbox:active:before {
     font-size: 13px !important
   }
   .card-basic {
-    padding: 25px 20px;
+    padding: 25px 20px
+  }
+  table#stations td:nth-child(3), table#stations th:nth-child(3) {
+    display: none
   }
 }
 @media (max-width:385px) {
@@ -456,9 +465,8 @@ label.checkbox:active:before {
     padding: 0 5px !important;
     font-size: 12px !important
   }
-  table#apscan td:nth-child(1), 
-  table#apscan th:nth-child(1) {
-   display: none;
+  table#apscan td:nth-child(1), table#apscan th:nth-child(1) {
+    display: none
   }
 }
 @media (max-width:340px) {
@@ -466,9 +474,8 @@ label.checkbox:active:before {
     padding: 0 2px !important;
     font-size: 10px !important
   }
-  table#apscan td:nth-child(4), 
-  table#apscan th:nth-child(4) {
-   display: none;
+  table#apscan td:nth-child(4), table#apscan th:nth-child(4) {
+    display: none
   }
 }
 @media (max-width:260px) {
@@ -526,7 +533,7 @@ label.checkbox:active:before {
 }
 .spinner {
   -webkit-animation: rotator 1.4s linear infinite;
-  animation: rotator 1.4s linear infinite;
+  animation: rotator 1.4s linear infinite
 }
 #spinner-container {
   position: fixed;
@@ -540,30 +547,30 @@ label.checkbox:active:before {
   transition: all .5s ease;
   z-index: 99;
   margin-top: -100px;
-  opacity: 0;
+  opacity: 0
 }
 .show-loading {
   margin-top: 0 !important;
-  opacity: 1 !important;
+  opacity: 1 !important
 }
 @-webkit-keyframes rotator {
   0% {
     -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+    transform: rotate(0deg)
   }
   100% {
     -webkit-transform: rotate(270deg);
-    transform: rotate(270deg);
+    transform: rotate(270deg)
   }
 }
 @keyframes rotator {
   0% {
     -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+    transform: rotate(0deg)
   }
   100% {
     -webkit-transform: rotate(270deg);
-    transform: rotate(270deg);
+    transform: rotate(270deg)
   }
 }
 .path {
@@ -572,81 +579,124 @@ label.checkbox:active:before {
   -webkit-transform-origin: center;
   transform-origin: center;
   -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
-  animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+  animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite
 }
 @-webkit-keyframes colors {
   0% {
-    stroke: #4285F4;
+    stroke: #4285F4
   }
   25% {
-    stroke: #DE3E35;
+    stroke: #DE3E35
   }
   50% {
-    stroke: #F7C223;
+    stroke: #F7C223
   }
   75% {
-    stroke: #1B9A59;
+    stroke: #1B9A59
   }
   100% {
-    stroke: #4285F4;
+    stroke: #4285F4
   }
 }
 @keyframes colors {
   0% {
-    stroke: #4285F4;
+    stroke: #4285F4
   }
   25% {
-    stroke: #DE3E35;
+    stroke: #DE3E35
   }
   50% {
-    stroke: #F7C223;
+    stroke: #F7C223
   }
   75% {
-    stroke: #1B9A59;
+    stroke: #1B9A59
   }
   100% {
-    stroke: #4285F4;
+    stroke: #4285F4
   }
 }
 @-webkit-keyframes dash {
   0% {
-    stroke-dashoffset: 187;
+    stroke-dashoffset: 187
   }
   50% {
     stroke-dashoffset: 46.75;
     -webkit-transform: rotate(135deg);
-    transform: rotate(135deg);
+    transform: rotate(135deg)
   }
   100% {
     stroke-dashoffset: 187;
     -webkit-transform: rotate(450deg);
-    transform: rotate(450deg);
+    transform: rotate(450deg)
   }
 }
 @keyframes dash {
   0% {
-    stroke-dashoffset: 187;
+    stroke-dashoffset: 187
   }
   50% {
     stroke-dashoffset: 46.75;
     -webkit-transform: rotate(135deg);
-    transform: rotate(135deg);
+    transform: rotate(135deg)
   }
   100% {
     stroke-dashoffset: 187;
     -webkit-transform: rotate(450deg);
-    transform: rotate(450deg);
+    transform: rotate(450deg)
   }
 }
 .main-wrap + #error {
   background: #000
 }
-td,th {
-      padding: 10px;
+td, th {
+  padding: 10px
 }
-table {
-  margin-bottom: 20px
+.no-events, nav.disabled a, .input-container label {
+  pointer-events: none
 }
-.no-events {
-  pointer-events: none;
+.edit {
+  border-radius: 1000px;
+  margin-left: 7px;
+  width: 24px;
+  height: 24px;
+  padding: 10px;
+  display: inline-block;
+  transition: all 0.5s ease;
+  float: right;
+}
+img, nav, td {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none
+}
+.edit:hover {
+  background: rgba(0, 0, 0, 0.1)
+}
+.edit:active {
+  background: rgba(0, 0, 0, 0.25)
+}
+tr td, tr {
+  transition: all 0.3s ease
+}
+tr:hover td {
+  background: rgba(0, 0, 0, 0.03)
+}
+tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.02)
+}
+b {
+  color: inherit
+}
+.background {
+  position: absolute;
+  width: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+}
+.edit.add, .edit.delete {
+  font-size: 29px;
+  line-height: 26px;
 }
