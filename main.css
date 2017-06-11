@@ -1,7 +1,9 @@
+:root {
+	--theme-color: #1976D2;
+}
 html, body {
 	margin: 0;
 	font-size: 100%;
-	background: #F1F1F1;
 	-webkit-touch-callout: none !important;
 	-webkit-user-select: none !important;
 	-moz-user-select: none !important;
@@ -9,7 +11,10 @@ html, body {
 	user-select: none !important;
 	-webkit-tap-highlight-color: transparent;
 }
-.oh, body {
+::-webkit-scrollbar-track-color {
+	background: #000;
+}
+.oh {
 	overflow: hidden;
 }
 nav.disabled a {
@@ -20,6 +25,7 @@ nav {
 	position: fixed;
 	width: 100%;
 	z-index: 100;
+	top: 0;
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.20)
 }
 nav .main-header {
@@ -44,7 +50,10 @@ nav .main-header {
 	left: 25px;
 	position: fixed;
 	top: 13px;
-	background: rgba(255, 255, 255, 0.1)
+	background: none;
+}
+#logo-img svg {
+	fill: rgba(255,255,255,0.81);
 }
 nav #links {
 	height: 64px;
@@ -62,8 +71,8 @@ nav #links a {
 	font-size: 14px
 }
 nav #links a.active {
-	border-bottom: 3px solid #fff;
-	line-height: 61px
+	box-shadow: 0 -3px 0 #fff inset;
+	color: rgba(255, 255, 255, 1);
 }
 nav #links a:hover {
 	background: rgba(255, 255, 255, 0.05)
@@ -84,7 +93,15 @@ h1 {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	overflow-y: scroll
+	overflow-y: scroll;
+	min-height: calc(100vh - 300px);
+	opacity: 0;
+	margin-top: 30px;
+	transition: ease 0.3s margin-top, ease 0.4s opacity;
+}
+.fadeIn {
+	margin-top: 0;
+	opacity: 1
 }
 #selectedClients li, #selectedAPs li {
 	list-style: none;
@@ -92,7 +109,7 @@ h1 {
 	padding: 3px
 }
 #selectedAPs, #selectedClients {
-	background-color: #eff0f1;
+	background-color: rgba(255,255,255,0.04);
 	-webkit-padding-start: 5px
 }
 #networksFound, #apMAC {
@@ -168,44 +185,35 @@ hr.small {
 	-webkit-margin-before: 0.5em;
 	-webkit-margin-after: 1.3em
 }
-.bold {
-	font-weight: 700
-}
 .clear {
 	clear: both
 }
-.warn {
-	font-weight: 600;
-	color: #f44336
-}
-.middle {
-	text-align: center
+.green {
+	color: #4CAF50 !important;
 }
 .red {
-	color: red
-}
-.green {
-	color: #1ecb1e
-}
-.padding {
-	padding: 0 1rem
+	color: #e53935 !important
 }
 body.error #error {
 	line-height: 23px;
-	background: #E64A19;
+	background: #d32f2f;
 	color: #fff;
 	word-wrap: break-word;
 	text-align: center;
 	font-size: 11px
 }
-body.error .main-wrap {
-	padding-top: 35px
-}
-body.error nav {
-	background: #F4511E
+body.error nav,
+body.error button,
+body.error .reboot,
+body.error input[type="checkbox"]:checked + label {
+	background: #e53935 !important;
+	border-color: #e53935;
 }
 body.error .main-header {
-	background: #FF5722
+	background: #f44336 !important
+}
+body.error .main-wrap {
+	padding-top: 20px;
 }
 #networksFound:empty, #apMAC:empty {
 	display: none
@@ -237,7 +245,7 @@ a:focus {
 	cursor: pointer;
 }
 button:disabled, button:disabled:hover {
-	background: #e2e2e2;
+	background: rgba(0,0,0,0.1);
 	box-shadow: none
 }
 .button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, .reboot:hover {
@@ -255,18 +263,19 @@ button:disabled, button:disabled:hover {
 	background: #E91E63
 }
 .divider {
-	background: #f7f7f7;
+	background: rgba(0,0,0,0.07);
 	height: 2px;
 	margin: 0;
 	margin: .9rem 2% !important
 }
 footer {
-	margin-top: 30px
+	margin-top: 30px;
+	background: #2B2B31;
 }
 .footer, .sub-section-attribution {
 	padding: 16px 40px;
-	background: #424242;
-	font-weight: 500
+	font-weight: 500;
+	display: block;
 }
 footer ul {
 	list-style: none;
@@ -287,8 +296,9 @@ footer a {
 	white-space: nowrap
 }
 .sub-section-attribution {
-	background: #3a3a3a;
-	font-size: 14px
+	background: rgba(0,0,0,0.15);
+	font-size: 14px;
+	width: calc(100% - 80px);
 }
 ::-webkit-input-placeholder {
 	color: #c7c7c7
@@ -426,7 +436,7 @@ label.checkbox:active:before {
 .container {
 	width: 95%;
 	margin-left: auto;
-	margin-right: auto
+	margin-right: auto;
 }
 .main-wrap .container:first-of-type {
 	margin-bottom: 20px;
@@ -462,7 +472,38 @@ label.checkbox:active:before {
 		top: 65px !important
 	}
 }
+@media (min-width: 520px) {
+	body {
+		overflow: hidden;
+	}
+
+::-webkit-scrollbar:not(:disabled) {
+	width: 14px;
+	background-color: #E8E8E8
+}
+::-webkit-scrollbar-thumb {
+	background-color: #a9a9a9;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: #b5b5b5
+}
+::-webkit-scrollbar-thumb:active, ::-webkit-scrollbar-thumb:disabled {
+	background-color: #6d6d6d
+}
+::-webkit-scrollbar-button {
+	width: 0;
+	height: 0;
+	display: none
+}
+::-webkit-scrollbar-corner {
+	background-color: transparent
+}
+}
 @media (max-width:520px) {
+	body {
+		background: #F1F1F1;
+		overflow: visible;
+	}
 	.network-info {
 		display: none;
 	}
@@ -477,7 +518,8 @@ label.checkbox:active:before {
 		display: none
 	}
 	.main-wrap {
-		top: 65px !important
+		top: 65px !important;
+		position: relative !important;
 	}
 	.tooltip {
 		display: none !important;
@@ -506,7 +548,7 @@ label.checkbox:active:before {
 		margin: 20px
 	}
 	.card {
-		min-height: 280px
+		min-height: 360px
 	}
 }
 .card-container-basic {
@@ -810,7 +852,8 @@ b {
 	overflow: hidden
 }
 .background svg {
-	height: 200%;
+	height: 100%;
+	width: 100%
 }
 .edit.add, .edit.delete {
 	font-size: 29px;
@@ -835,11 +878,12 @@ b {
 	cursor: pointer;
 }
 .reboot-container {
-	position: fixed;
+	position: fixed !important;
 	bottom: 10px;
 	right: 20px;
 	z-index: 1;
-	pointer-events: none
+	pointer-events: none;
+	overflow: visible !important;
 }
 .tooltip {
 	opacity: 0;
@@ -875,9 +919,8 @@ b {
 	height: 25px;
 	display: block;
 	border-radius: 1000px;
-	border-top-left-radius: 0;
 	line-height: 25px;
-	color: #6b6b6b;
+	color: #1e67a0;
 	margin-top: 5px;
 	font-size: 10px;
 }
@@ -887,4 +930,85 @@ b {
 	-ms-transform: rotate(-45deg);
 	-webkit-transform: rotate(-45deg);
 	transform: rotate(-45deg);
+	border-top-left-radius: 0;
+	box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Waves library */
+.waves-effect {
+	position: relative;
+	cursor: pointer;
+	display: inline-block;
+	overflow: hidden;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent
+}
+.waves-effect .waves-ripple {
+	position: absolute;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	margin-top: -50px;
+	margin-left: -50px;
+	opacity: 0;
+	background: rgba(0, 0, 0, .2);
+	background: -webkit-radial-gradient(rgba(0, 0, 0, .2) 0, rgba(0, 0, 0, .3) 40%, rgba(0, 0, 0, .4) 50%, rgba(0, 0, 0, .5) 60%, rgba(255, 255, 255, 0) 70%);
+	background: -o-radial-gradient(rgba(0, 0, 0, .2) 0, rgba(0, 0, 0, .3) 40%, rgba(0, 0, 0, .4) 50%, rgba(0, 0, 0, .5) 60%, rgba(255, 255, 255, 0) 70%);
+	background: -moz-radial-gradient(rgba(0, 0, 0, .2) 0, rgba(0, 0, 0, .3) 40%, rgba(0, 0, 0, .4) 50%, rgba(0, 0, 0, .5) 60%, rgba(255, 255, 255, 0) 70%);
+	background: radial-gradient(rgba(0, 0, 0, .2) 0, rgba(0, 0, 0, .3) 40%, rgba(0, 0, 0, .4) 50%, rgba(0, 0, 0, .5) 60%, rgba(255, 255, 255, 0) 70%);
+	-webkit-transition: all .5s ease-out;
+	-moz-transition: all .5s ease-out;
+	-o-transition: all .5s ease-out;
+	transition: all .5s ease-out;
+	-webkit-transition-property: -webkit-transform, opacity;
+	-moz-transition-property: -moz-transform, opacity;
+	-o-transition-property: -o-transform, opacity;
+	transition-property: transform, opacity;
+	-webkit-transform: scale(0) translate(0, 0);
+	-moz-transform: scale(0) translate(0, 0);
+	-ms-transform: scale(0) translate(0, 0);
+	-o-transform: scale(0) translate(0, 0);
+	transform: scale(0) translate(0, 0);
+	pointer-events: none
+}
+.waves-effect.waves-light .waves-ripple {
+	background: rgba(255, 255, 255, .4);
+	background: -webkit-radial-gradient(rgba(255, 255, 255, .2) 0, rgba(255, 255, 255, .3) 40%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, .5) 60%, rgba(255, 255, 255, 0) 70%);
+	background: -o-radial-gradient(rgba(255, 255, 255, .2) 0, rgba(255, 255, 255, .3) 40%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, .5) 60%, rgba(255, 255, 255, 0) 70%);
+	background: -moz-radial-gradient(rgba(255, 255, 255, .2) 0, rgba(255, 255, 255, .3) 40%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, .5) 60%, rgba(255, 255, 255, 0) 70%);
+	background: radial-gradient(rgba(255, 255, 255, .2) 0, rgba(255, 255, 255, .3) 40%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, .5) 60%, rgba(255, 255, 255, 0) 70%)
+}
+.waves-effect.waves-classic .waves-ripple {
+	background: rgba(0, 0, 0, .2)
+}
+.waves-effect.waves-classic.waves-light .waves-ripple {
+	background: rgba(255, 255, 255, .4)
+}
+.waves-button, .waves-circle {
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-mask-image: -webkit-radial-gradient(circle, #fff 100%, #000 100%)
+}
+.waves-button, .waves-button:hover, .waves-button:visited, .waves-button-input {
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border: none;
+	outline: 0;
+	color: inherit;
+	background-color: transparent;
+	font-size: 1em;
+	line-height: 1em;
+	text-align: center;
+	text-decoration: none;
+	z-index: 1
+}
+span.light {
+	opacity: 0.4;
 }

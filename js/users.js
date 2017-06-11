@@ -8,7 +8,6 @@ var nameListTable = getE('nameList');
 var res;
 var selectAllState = 'not-checked';
 var tableHeaderHTML = '<tr><th>Name</th><th>Client info</th><th>Pkts</th><th style="padding-left: 40px"></th></tr>';
-var edit = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAgMAAADw5/WeAAAADFBMVEUAAAAAAAAAAAAAAAA16TeWAAAABHRSTlMB/phhN1gO+QAAADtJREFUeF5jQAM8YFIVTIo6AAkm1gIgyenYABIOAAlPjQAJhyaAhEPBwmFowrxgYU6wMGcEiOTbgGYPAPKdCT6Ht/q3AAAAAElFTkSuQmCC'
 
 function compare(a, b) {
     if (a.p > b.p) return -1;
@@ -67,11 +66,12 @@ function getResults() {
 
             tr += '<tr>';
             tr += '<td><b>' + res.nameList[i].n + '</b><br>' + res.nameList[i].m + '</td>';
-            tr += '<td><div class="edit delete" onclick="deleteName(' + i + ')">&times;</div><div class="clearfix"></div><div class="edit add" onclick="add(' + i + ')">+</div><div class="clearfix"></div><div class="edit" onclick="changeName(' + i + ')"><img src="' + edit + '"></div></td>';
+            tr += '<td><div class="edit delete" onclick="deleteName(' + i + ')">&times;</div><div class="clearfix"></div><div class="edit add" onclick="add(' + i + ')">+</div><div class="clearfix"></div><div class="edit" onclick="editNameList(' + i + ')"><svg style=width:22px;height:24px viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"></path></svg></div></td>';
             tr += '</tr>';
         }
 
         nameListTable.innerHTML = tr;
+        Waves.attach('.edit');
 
     }, function() {
         showMessage("Reconnect to Wi-Fi network");
@@ -81,16 +81,12 @@ function getResults() {
 }
 
 function scan() {
-    toggleBtn(true);
     getResponse("ClientScan.json?time=" + scanTime, function(responseText) {
         if (responseText == "true") {
-            setTimeout(function() {
-                toggleBtn(true);
-                getResults();
-            }, scanTime * 1000);
+            toggleBtn(true);
+            checkConnection();
         } else {
             showMessage("INFO: No Wi-Fi network(s) selected!'");
-            scanStatus.classList.remove("show-loading");
         }
 
     });
