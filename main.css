@@ -113,15 +113,6 @@ h1 {
 	margin-top: 0;
 	opacity: 1
 }
-#selectedClients li, #selectedAPs li {
-	list-style: none;
-	font-family: Consolas, Courier New, monospace, sans-serif;
-	padding: 3px
-}
-#selectedAPs, #selectedClients {
-	background-color: rgba(255, 255, 255, 0.04);
-	-webkit-padding-start: 5px
-}
 #networksFound, #apMAC {
 	background: rgba(0, 0, 0, 0.05);
 	padding: 6px;
@@ -216,7 +207,7 @@ body.error #error {
 	text-align: center;
 	font-size: 11px
 }
-body.error nav, body.error button, body.error .reboot, body.error input[type="checkbox"]:checked + label {
+body.error nav, body.error button:not(.secondary), body.error .reboot, body.error input[type="checkbox"]:checked + label {
 	background: #e53935 !important;
 	border-color: #e53935;
 }
@@ -263,6 +254,13 @@ button:disabled, button:disabled:hover {
 	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
 	background: #1E88E5
 }
+.clone svg {
+	height: 17px;
+	fill: #fff;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 8px;
+}
 .secondary {
 	background: none;
 	box-shadow: none !important;
@@ -290,11 +288,13 @@ button:disabled, button:disabled:hover {
 footer {
 	margin-top: 30px;
 	background: #2B2B31;
+	height: 120px;
 }
 .footer, .sub-section-attribution {
 	padding: 16px 40px;
 	font-weight: 500;
 	display: block;
+	height: 32px;
 }
 footer ul {
 	list-style: none;
@@ -318,6 +318,8 @@ footer a {
 	background: rgba(0, 0, 0, 0.15);
 	font-size: 14px;
 	width: calc(100% - 80px);
+	height: 20px;
+	padding: 18px 40px;
 }
 ::-webkit-input-placeholder {
 	color: #c7c7c7
@@ -326,11 +328,12 @@ label {
 	font-size: 14px;
 }
 .input-container {
-	position: relative
+	position: relative;
+	transition: opacity 0.5s ease
 }
 .input-container.disabled {
 	opacity: 0.3;
-	touch-events: none;
+	pointer-events: none;
 }
 .input-container input {
 	border: 0;
@@ -397,8 +400,7 @@ label {
 	color: #F44336;
 }
 .settings .checkbox, #card-wrapper .checkbox {
-	float: right;
-	margin-top: 3px
+	float: right
 }
 input[type="checkbox"] {
 	display: none
@@ -447,6 +449,13 @@ label.checkbox:after {
 label.checkbox:active:before {
 	background: #bfbfbf
 }
+.row.inputCheckbox .checkbox {
+	float: left;
+	margin-right: 10px
+}
+.row.inputCheckbox label:not(.checkbox), .settings  label:not(.checkbox), #card-wrapper label:not(.checkbox) {
+	line-height: 18px;
+}
 * {
 	font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
 	color: #333447;
@@ -459,6 +468,7 @@ label.checkbox:active:before {
 	width: 96%;
 	margin-left: auto;
 	margin-right: auto;
+	min-height: calc(100% - 170px);
 }
 .main-wrap .container:first-of-type {
 	margin-bottom: 20px;
@@ -519,6 +529,9 @@ label.checkbox:active:before {
 	::-webkit-scrollbar-corner {
 		background-color: transparent
 	}
+	.row.inputCheckbox .col-6:nth-child(2) {
+		margin-top: 26px
+	}
 }
 @media (max-width:520px) {
 	body {
@@ -542,6 +555,15 @@ label.checkbox:active:before {
 		top: 65px !important;
 		position: relative !important;
 	}
+	.row.inputCheckbox .col-6:nth-child(2) {
+		margin-bottom: 20px
+	}
+	.container {
+		min-height: calc(100% - 235px);
+	}
+	.main-wrap {
+		overflow-y: hidden;
+	}
 }
 @media (min-width:800px) {
 	.card-basic #logo-img {
@@ -561,7 +583,8 @@ label.checkbox:active:before {
 	}
 }
 .card-container-basic {
-	margin-top: 20px
+	margin-top: 20px;
+	vertical-align: top
 }
 @media (max-width:539px) {
 	table#apscan td:nth-child(3), table#apscan th:nth-child(3) {
@@ -815,22 +838,6 @@ img, nav, td {
 .clearfix, .dn {
 	display: none
 }
-.clone-text, .clone-button {
-	display: inline-block;
-	line-height: 36px;
-	padding: 3px;
-}
-.clone-text {
-	font-size: 0.8rem;
-	font-family: Consolas, Courier New, monospace, sans-serif;
-}
-.clone-button {
-	float: right;
-	margin-right: 2px;
-}
-.clone-container {
-	display: block;
-}
 @media (max-width:361px) {
 	.clearfix {
 		display: block;
@@ -1048,6 +1055,12 @@ b {
 }
 #card-wrapper {
 	width: 300%;
+}
+#c3:not(.away) {
+	display: none;
+}
+#c1 svg {
+	fill: #29363C;
 }
 #c1, #c2, #c3 {
 	display: inline-block;

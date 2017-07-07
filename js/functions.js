@@ -43,11 +43,13 @@ function autoReload() {
     setTimeout(function() {getResponse("ClientScanTime.json", function(responseText) {window.location.reload()}, function() {autoReload()})}, 3000);
 }
 
-function restart() {
+function restart(noIndication) {
     vibrate();
-    sL.className = "";
-    showLoading();
-    autoReload();
+    if (noIndication != true){
+        sL.className = "";
+        showLoading();
+        autoReload();
+    }
     getResponse("restartESP.json?", function(responseText) {
         if (responseText !== "true") {
             showMessage("Failed to restart Wi-PWN! (E23)");
@@ -95,10 +97,29 @@ function getResponse(adr, callback, timeoutCallback, timeout, method) {
     xmlhttp.ontimeout = timeoutCallback;
 }
 
+function scrollIt(element) {
+    if (window.innerWidth <= 520) {
+        var displayType = window
+    } else {
+        var displayType = document.getElementsByClassName("main-wrap")[0]
+    }
+    try {
+        displayType.scrollTo({
+            'behavior': 'smooth',
+            'left': 0,
+            'top': element.offsetTop - 25
+        });
+    } catch(err) {
+        element.scrollIntoView()
+        window.scrollBy(0, -75);
+    }
+}
+
+
 function vibrate() {
     navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
     if (navigator.vibrate) {
-        navigator.vibrate(20);
+        navigator.vibrate(50);
     }
 }
 

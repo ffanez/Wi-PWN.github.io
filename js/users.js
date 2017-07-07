@@ -55,7 +55,7 @@ function getResults() {
 
             tr += '</tr>';
         }
-        table.innerHTML = tr;
+        if (tr != tableHeaderHTML) table.innerHTML = tr;
         if (res.nameList.length != 0) {
             document.getElementById('saved-users').className = "";
         }
@@ -109,10 +109,12 @@ function selAll() {
 }
 
 function clearNameList() {
-    getResponse("clearNameList.json", function(responseText) {
-        if (responseText == "true") getResults();
-        else showMessage("ERROR: Bad response 'clearNameList.json' (E9)");
-    });
+    if (confirm("Remove all saved users?") == true) {
+        getResponse("clearNameList.json", function(responseText) {
+            if (responseText == "true") getResults();
+            else showMessage("ERROR: Bad response 'clearNameList.json' (E9)");
+        });
+    }
 }
 
 function addClient() {
